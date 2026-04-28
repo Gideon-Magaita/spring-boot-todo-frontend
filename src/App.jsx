@@ -5,6 +5,8 @@ import Layout from './components/pages/Layout'
 import Home from './components/pages/Home'
 import TodoListComponent from './components/pages/TodoListComponent'
 import AddTodoComponent from './components/pages/AddTodoComponent'
+import RegisterComponent from './components/pages/RegisterComponent'
+import LoginComponent from './components/pages/LoginComponent'
 //React toast imports
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,6 +23,8 @@ function App() {
            <Route path="/todos" element={<TodoListComponent/>}/>
            <Route path="/add-todo" element={<AddTodoComponent/>}/>
            <Route path="/edit/:id" element={<AddTodoComponent />} />
+           <Route path='/register' element={<RegisterComponent/>}/>
+           <Route path='/login' element={<LoginComponent/>}/>
            </Route>
         </Routes>
     </Router>

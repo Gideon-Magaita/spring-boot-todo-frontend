@@ -29,7 +29,7 @@ export default function Header() {
           </li>
   
           <li className="nav-item">
-            <Link className="nav-link text-white" to="/">Add Todo</Link>
+            <Link className="nav-link text-white" to="/add-todo">Add Todo</Link>
           </li>
   
           <li className="nav-item dropdown">
@@ -52,18 +52,7 @@ export default function Header() {
   
         </ul>
   
-        <form className="d-flex me-3">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Search"
-          />
-          <button className="btn btn-outline-light" type="submit">
-            Search
-          </button>
-        </form>
-  
-        <button className="btn btn-danger">Logout</button>
+        <Link className="btn btn-secondary" to="/register">Register</Link>
   
       </div>
     </div>
