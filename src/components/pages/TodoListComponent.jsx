@@ -55,9 +55,7 @@ const TodoListComponent = () => {
           })
           .catch((error) => console.error(error));
       }
-
-
-     
+  
   return (
     <div className="container mt-5">
       <div className="row">
