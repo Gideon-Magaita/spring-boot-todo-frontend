@@ -19,7 +19,7 @@ function App() {
         <Routes>
 
            <Route path="/" element={<Layout/>}>
-           <Route index element={<Home/>}/>
+           <Route index element={<RegisterComponent/>}/>
            <Route path="/todos" element={<TodoListComponent/>}/>
            <Route path="/add-todo" element={<AddTodoComponent/>}/>
            <Route path="/edit/:id" element={<AddTodoComponent />} />

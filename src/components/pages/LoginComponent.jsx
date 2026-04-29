@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginComponent = () => {
     const navigate = useNavigate();
 
-    const [usernameOrEmail, setUsernameOrEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const [errors, setErrors] = useState({});
@@ -17,8 +17,8 @@ const handleSubmit = async (e) => {
 
     let formErrors = {};
 
-    if (!usernameOrEmail.trim()) {
-        formErrors.usernameOrEmail = "Username or Email is required";
+    if (!username.trim()) {
+        formErrors.username = "Username or Email is required";
     }
 
     if (!password.trim()) {
@@ -31,11 +31,11 @@ const handleSubmit = async (e) => {
         try {
             setLoading(true);
 
-            const response = await loginUser(usernameOrEmail, password);
-            console.log("Login Response:", response.data);
+            // const response = await loginUser(username, password);
+            // console.log("Login Response:", response.data);
 
             //FIXED Basic Auth token
-            const token = 'Basic ' + window.btoa(usernameOrEmail + ":" + password);
+            const token = 'Basic ' + window.btoa(username + ":" + password);
             storeToken(token);
 
             toast.success("Login successful!");
@@ -75,14 +75,14 @@ const handleSubmit = async (e) => {
                                     <label className="form-label">Username or Email</label>
                                     <input
                                         type="text"
-                                        className={`form-control ${errors.usernameOrEmail && 'is-invalid'}`}
-                                        value={usernameOrEmail}
-                                        onChange={(e) => setUsernameOrEmail(e.target.value)}
+                                        className={`form-control ${errors.username && 'is-invalid'}`}
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                         placeholder="Enter username or email"
                                     />
-                                    {errors.usernameOrEmail && (
+                                    {errors.username && (
                                         <div className="invalid-feedback">
-                                            {errors.usernameOrEmail}
+                                            {errors.username}
                                         </div>
                                     )}
                                 </div>
