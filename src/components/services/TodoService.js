@@ -6,15 +6,14 @@ const BASE_REST_API_URL = 'http://localhost:8080/api/todos'
 
 // Add a request interceptor
 axios.interceptors.request.use(function (config) {
+    const token = getToken();
 
-      config.headers['Authorization'] = getToken();
+    if (token) {
+        config.headers['Authorization'] = token; 
+    }
 
     return config;
-  },
-  function (error) {
-    return Promise.reject(error);
-  }
-);
+});
 
 export const getAllTodos = () => axios.get(BASE_REST_API_URL)
 export const createTodos = (todo) => axios.post(BASE_REST_API_URL,todo)

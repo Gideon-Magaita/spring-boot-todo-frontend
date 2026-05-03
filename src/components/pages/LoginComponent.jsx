@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginUser, storeToken } from '../services/AuthService';
+import { loginUser, saveLoggedInUser, storeToken } from '../services/AuthService';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
@@ -31,18 +31,20 @@ const handleSubmit = async (e) => {
         try {
             setLoading(true);
 
-            // const response = await loginUser(username, password);
-            // console.log("Login Response:", response.data);
+            const response = await loginUser(username, password);
+            console.log("Login Response:", response.data);
 
-            //FIXED Basic Auth token
+            //Basic Auth token
             const token = 'Basic ' + window.btoa(username + ":" + password);
             storeToken(token);
 
             toast.success("Login successful!");
 
+            saveLoggedInUser(username);
             setTimeout(() => {
                 navigate('/todos');
             }, 1500);
+
 
         } catch (error) {
             console.error(error);

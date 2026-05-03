@@ -35,7 +35,7 @@ const RegisterComponent = () => {
                 const response = await registerUser(registerObj);
                 console.log("Server Response:", response.data);
 
-                // ✅ SUCCESS TOAST
+                //SUCCESS TOAST
                 toast.success("User registered successfully!");
 
                 // Reset form
@@ -45,7 +45,7 @@ const RegisterComponent = () => {
                 setPassword('');
                 setErrors({});
 
-                // ✅ AUTO REDIRECT AFTER 2 SECONDS
+                //AUTO REDIRECT AFTER 2 SECONDS
                 setTimeout(() => {
                     navigate('/login');
                 }, 2000);
