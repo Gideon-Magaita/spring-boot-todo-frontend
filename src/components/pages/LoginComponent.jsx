@@ -35,7 +35,9 @@ const handleSubmit = async (e) => {
             console.log("Login Response:", response.data);
 
             //Basic Auth token
-            const token = 'Basic ' + window.btoa(username + ":" + password);
+            // const token = 'Basic ' + window.btoa(username + ":" + password);
+            //JWT implementation
+            const token = 'Bearer ' + response.data.accessToken;
             storeToken(token);
 
             toast.success("Login successful!");
