@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { Link,useNavigate,useParams } from 'react-router-dom'
 import { getAllTodos,deleteTodo,completeTodo,incompleteTodo } from '../services/TodoService';
 import { toast } from 'react-toastify';
+import { isAdminUser } from '../services/AuthService';
 
 const TodoListComponent = () => {
 
@@ -9,6 +10,9 @@ const TodoListComponent = () => {
     const { id } = useParams();
 
     const [todos,setTodos] = useState([]);
+    
+    //check if the user is admin
+    const isAdmin = isAdminUser();
 
     useEffect(()=>{
         ListTodos();
@@ -63,7 +67,10 @@ const TodoListComponent = () => {
               <div className="card">
                   <div className="card-header" style={{ display: "flex", justifyContent: "space-between" }}>
                       <h2>List of Todos</h2>
-                      <Link className="btn btn-primary" to="/add-todo">Add Todos</Link>
+                      {
+                        isAdmin && <Link className="btn btn-primary" to="/add-todo">Add Todos</Link>
+                      }
+                      
                   </div>
                   <div className="card-body">
                   <table className="table table-striped table-responsive">
@@ -85,33 +92,39 @@ const TodoListComponent = () => {
                                 <td>{todo.description}</td>
                                 <td>{todo.completed?"Completed":"Pending"}</td>
                                 <td style={{ display: "flex", justifyContent: "space-between" }}>
-                                <button
-                                className="btn btn-warning"
-                                onClick={() => navigate(`/edit/${todo.id}`)}
-                                >
-                                Edit
-                                </button>
-
-                                <button
-                                className="btn btn-danger"
-                                onClick={() => handleDelete(todo.id)}
-                                >
-                                Delete
-                                </button>
+                                
+                                {
+                                  isAdmin && <button
+                                              className="btn btn-warning"
+                                              onClick={() => navigate(`/edit/${todo.id}`)}
+                                              >
+                                              Edit
+                                              </button>
+                                }
+                                
+                                {
+                                  isAdmin && <button
+                                            className="btn btn-danger"
+                                            onClick={() => handleDelete(todo.id)}
+                                            >
+                                            Delete
+                                            </button>
+                                }
+                                
                                 <button
                                     className="btn btn-success"
                                     disabled={todo.completed}
                                     onClick={() => markCompleteTodo(todo.id)}
                                     >
                                     {todo.completed ? "Done" : "Complete"}
-                                    </button>
+                                </button>
 
-                                    <button
-                                    className="btn btn-secondary"
-                                    onClick={() => markIncompleteTodo(todo.id)}
-                                    >
-                                    Incomplete
-                                    </button>
+                                <button
+                                className="btn btn-secondary"
+                                onClick={() => markIncompleteTodo(todo.id)}
+                                >
+                                Incomplete
+                                </button>
                                 </td>
                                 
                                 </tr>

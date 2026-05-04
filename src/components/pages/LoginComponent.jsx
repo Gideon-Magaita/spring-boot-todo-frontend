@@ -38,11 +38,12 @@ const handleSubmit = async (e) => {
             // const token = 'Basic ' + window.btoa(username + ":" + password);
             //JWT implementation
             const token = 'Bearer ' + response.data.accessToken;
+            const role  = response.data.role;
             storeToken(token);
 
             toast.success("Login successful!");
 
-            saveLoggedInUser(username);
+            saveLoggedInUser(username,role);
             setTimeout(() => {
                 navigate('/todos');
             }, 1500);
